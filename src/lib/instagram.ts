@@ -13,6 +13,9 @@
  * Supports optional proxy via PROXY_URL environment variable.
  */
 
+import fetch from 'node-fetch';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
 // ─── Types ───
 
 export interface MediaItem {
@@ -103,31 +106,51 @@ const BROWSER_HEADERS: Record<string, string> = {
 
 // ─── HTML Fetching ───
 
-async function fetchInstagramPage(url: string): Promise<string> {
-  const proxyUrl = getProxyUrl();
+// Status codes that indicate Instagram is blocking our server IP
+const BLOCKED_STATUSES = new Set([429, 403, 401, 503]);
 
-  let fetchUrl = url;
-  let fetchOptions: RequestInit = {
+async function attemptFetch(url: string, useProxy: boolean): Promise<Response> {
+  const proxyUrl = getProxyUrl();
+  const fetchOptions: any = {
     headers: BROWSER_HEADERS,
     redirect: 'follow',
   };
 
-  if (proxyUrl) {
-    fetchUrl = `${proxyUrl}?url=${encodeURIComponent(url)}`;
-    fetchOptions = {
-      headers: {
-        ...BROWSER_HEADERS,
-        'X-Target-URL': url,
-      },
-      redirect: 'follow',
-    };
+  if (useProxy && proxyUrl) {
+    fetchOptions.agent = new HttpsProxyAgent(proxyUrl);
   }
 
-  const response = await fetch(fetchUrl, fetchOptions);
+  return fetch(url, fetchOptions) as Promise<Response>;
+}
 
+async function fetchInstagramPage(url: string): Promise<string> {
+  const proxyUrl = getProxyUrl();
+
+  // ── Step 1: Try a direct connection first (free, fast) ──
+  let response: Response;
+  try {
+    console.log('[fetch] Attempting direct connection...');
+    response = await attemptFetch(url, false);
+  } catch (directErr) {
+    console.warn('[fetch] Direct connection failed (network error), switching to proxy...');
+    if (!proxyUrl) throw new Error('Network error. Please check your connection and try again.');
+    response = await attemptFetch(url, true);
+  }
+
+  // ── Step 2: If Instagram blocked the direct request, retry via proxy ──
+  if (BLOCKED_STATUSES.has(response.status) && proxyUrl) {
+    console.warn(`[fetch] Direct blocked (HTTP ${response.status}), retrying via proxy...`);
+    try {
+      response = await attemptFetch(url, true);
+    } catch (proxyErr) {
+      throw new Error('Both direct and proxy connections failed. Please try again later.');
+    }
+  }
+
+  // ── Step 3: Handle final response errors ──
   if (!response.ok) {
-    if (response.status === 429) {
-      throw new Error('Rate limited by Instagram. Please try again in a few minutes.');
+    if (response.status === 429 || response.status === 403) {
+      throw new Error('Instagram is rate limiting requests. Please try again in a few minutes.');
     }
     if (response.status === 404) {
       throw new Error('Content not found. The post may have been deleted or is from a private account.');
@@ -139,7 +162,8 @@ async function fetchInstagramPage(url: string): Promise<string> {
 }
 
 function getProxyUrl(): string | null {
-  return import.meta.env.PROXY_URL ?? null;
+  // Support both Astro env and standard Node process.env
+  return (import.meta.env.PROXY_URL ?? process.env.PROXY_URL) || null;
 }
 
 // ─── HTML Parsing Helpers ───
@@ -190,7 +214,7 @@ function decodeEntities(str: string): string {
  */
 function extractVideoVersions(html: string): MediaItem[] {
   const media: MediaItem[] = [];
-  
+
   // Find video_versions array
   const vvMatch = html.match(/"video_versions"\s*:\s*\[([\s\S]*?)\]/);
   if (!vvMatch) {
@@ -200,10 +224,10 @@ function extractVideoVersions(html: string): MediaItem[] {
 
   try {
     const block = vvMatch[0];
-    
+
     // Split the block into individual objects to ensure we match the right width with the right URL
     const chunks = block.split(/\{"type"/);
-    
+
     const seenWidths = new Set<number>();
     const seenUrls = new Set<string>();
 
@@ -212,12 +236,12 @@ function extractVideoVersions(html: string): MediaItem[] {
       if (!urlMatch) return;
 
       const url = decodeEntities(urlMatch[1]);
-      
+
       // Instagram sometimes includes the exact same URL multiple times
       // We also want to prevent duplicate widths (same quality)
       const wMatch = chunk.match(/"width"\s*:\s*(\d+)/);
       const width = wMatch ? parseInt(wMatch[1]) : 0;
-      
+
       const cleanUrl = url.split('?')[0]; // compare base url to catch dupes
 
       if (seenUrls.has(cleanUrl)) return;
@@ -237,7 +261,7 @@ function extractVideoVersions(html: string): MediaItem[] {
 
       media.push({ url, type: 'video', width: width || undefined, height, quality });
     });
-    
+
   } catch {
     return extractMp4Urls(html);
   }
@@ -253,7 +277,7 @@ function extractMp4Urls(html: string): MediaItem[] {
   const mp4Regex = /https?:\/\/(?:instagram\.[a-z0-9.-]+\.fna\.fbcdn\.net|scontent[a-z0-9.-]*\.cdninstagram\.com)\/[^\s"'\\]+\.mp4[^\s"'\\]*/g;
   const seen = new Set<string>();
   let mp4Match;
-  
+
   while ((mp4Match = mp4Regex.exec(html)) !== null) {
     const url = decodeEntities(mp4Match[0]);
     if (!seen.has(url)) {
@@ -261,7 +285,7 @@ function extractMp4Urls(html: string): MediaItem[] {
       media.push({ url, type: 'video', quality: 'Auto' });
     }
   }
-  
+
   return media;
 }
 
@@ -312,20 +336,20 @@ function extractImages(html: string): MediaItem[] {
  */
 function extractCarouselItems(html: string): MediaItem[] {
   const media: MediaItem[] = [];
-  
+
   // Look for carousel_media or edge_sidecar_to_children
   const carouselMatch = html.match(/"carousel_media"\s*:\s*\[([\s\S]*?)\]\s*,\s*"/);
   if (!carouselMatch) return media;
 
   // Within carousel, find each item's video_versions or image_versions2
   const items = carouselMatch[1];
-  
+
   // Split by item boundaries — look for "pk" or "id" patterns that separate items
   const itemChunks = items.split(/"pk"\s*:/);
-  
+
   for (const chunk of itemChunks) {
     if (chunk.length < 50) continue;
-    
+
     // Check if this item has video
     const videoVersions = extractVideoVersions('"video_versions":' + chunk);
     if (videoVersions.length > 0) {
@@ -333,7 +357,7 @@ function extractCarouselItems(html: string): MediaItem[] {
       media.push(videoVersions[0]);
       continue;
     }
-    
+
     // Otherwise it's an image
     const images = extractImages(chunk);
     if (images.length > 0) {
@@ -437,15 +461,15 @@ export async function scrapeInstagram(inputUrl: string): Promise<DownloadResult>
     let videos = extractVideoVersions(html);
     if (videos.length > 0) {
       contentType = parsed.type === 'reel' ? 'reel' : 'video';
-      
+
       // Sort videos by width descending to get best quality first
       videos.sort((a, b) => (b.width || 0) - (a.width || 0));
-      
+
       // Keep up to 3 qualities
       videos = videos.slice(0, 3);
-      const qualityLabels = videos.length === 3 ? ['Full HD', 'HD', 'Medium'] : 
-                            videos.length === 2 ? ['Full HD', 'HD'] : ['Full HD'];
-                            
+      const qualityLabels = videos.length === 3 ? ['Full HD', 'HD', 'Medium'] :
+        videos.length === 2 ? ['Full HD', 'HD'] : ['Full HD'];
+
       videos.forEach((vid, idx) => {
         vid.quality = qualityLabels[idx];
         if (idx === 0 && ogImage) {
@@ -469,12 +493,12 @@ export async function scrapeInstagram(inputUrl: string): Promise<DownloadResult>
       let images = extractImages(html);
       if (images.length > 0) {
         contentType = 'image';
-        
+
         images.sort((a, b) => (b.width || 0) - (a.width || 0));
         images = images.slice(0, 3);
-        const qualityLabels = images.length === 3 ? ['Full HD', 'HD', 'Medium'] : 
-                              images.length === 2 ? ['Full HD', 'HD'] : ['Full HD'];
-                              
+        const qualityLabels = images.length === 3 ? ['Full HD', 'HD', 'Medium'] :
+          images.length === 2 ? ['Full HD', 'HD'] : ['Full HD'];
+
         images.forEach((img, idx) => {
           img.quality = qualityLabels[idx];
           media.push(img);

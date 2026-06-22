@@ -1,46 +1,72 @@
-# Astro Starter Kit: Basics
+# InstaDownloader
 
-```sh
-npm create astro@latest -- --template basics
+A fast, clean Instagram video & image downloader built with [Astro](https://astro.build/) and deployed on [Render.com](https://render.com).
+
+## Features
+
+- Download Instagram Reels, Posts, Stories & Carousels
+- Smart proxy fallback — direct connection first, auto-switches to proxy if blocked
+- Mobile-friendly responsive UI
+- No login required
+
+## Tech Stack
+
+- **Framework:** Astro (SSR, Node.js adapter)
+- **Styling:** Tailwind CSS v4
+- **Hosting:** Render.com (Web Service)
+- **CDN / Security:** Cloudflare (DNS + WAF)
+
+## Local Development
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Environment Variables
 
-## 🚀 Project Structure
+Create a `.env` file in the root of the project (this is **gitignored** and must never be committed):
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```env
+# Optional: HTTP/HTTPS proxy for Instagram fetching
+# Format: http://username:password@IP:Port
+PROXY_URL=http://username:password@your-proxy-ip:port
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+> **Important:** If `PROXY_URL` is set, the app will first try a direct connection to Instagram. If Instagram blocks it (429/403), it will automatically retry using the proxy. If `PROXY_URL` is not set, only direct connections are used.
 
-## 🧞 Commands
+## Build & Deploy
 
-All commands are run from the root of the project, from a terminal:
+```bash
+# Build for production
+npm run build
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+# Start the Node.js server
+npm run start
+```
 
-## 👀 Want to learn more?
+### Render.com Setup
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Setting | Value |
+|---|---|
+| Runtime | Node |
+| Build Command | `npm install && npm run build` |
+| Start Command | `npm run start` |
+| Node Version | `22` |
+
+Add your `PROXY_URL` in the Render dashboard under **Environment Variables**.
+
+## Project Structure
+
+```
+src/
+├── components/     # UI components (DownloadInput, etc.)
+├── layouts/        # Page layouts
+├── lib/
+│   └── instagram.ts  # Instagram scraping logic & proxy fallback
+├── pages/
+│   ├── api/
+│   │   └── download.ts  # API endpoint
+│   └── index.astro      # Home page
+└── styles/         # Global CSS
+```

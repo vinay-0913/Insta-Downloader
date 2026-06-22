@@ -13,12 +13,19 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# environment variables
+# environment variables - NEVER commit these!
 .env
 .env.production
+.env.local
 
 # macOS-specific files
 .DS_Store
 
 # jetbrains setting folder
 .idea/
+
+# Cloudflare / Wrangler (no longer used)
+.wrangler/
+
+# Test files
+test_dupe.mjs

@@ -7,8 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node build.mjs",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name instadownloader",
+    "build": "astro build",
+    "start": "node ./dist/server/entry.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -17,6 +17,8 @@
     "@astrojs/node": "^10.1.4",
     "@tailwindcss/vite": "^4.3.1",
     "astro": "^6.4.7",
+    "https-proxy-agent": "^9.1.0",
+    "node-fetch": "^3.3.2",
     "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
