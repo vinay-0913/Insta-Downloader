@@ -1,0 +1,64 @@
+---
+---
+
+<section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+    <!-- Gradient Mesh / Orbs -->
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-brand-start/20 blur-[120px] animate-float delay-100"></div>
+    <div class="absolute top-[20%] right-[-10%] w-[35%] h-[35%] rounded-full bg-brand-end/20 blur-[100px] animate-float delay-300"></div>
+    <div class="absolute bottom-[-10%] left-[20%] w-[30%] h-[30%] rounded-full bg-brand-mid/15 blur-[80px] animate-float delay-500"></div>
+    
+    <!-- Grid overlay for subtle texture -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"></div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-mid/30 bg-brand-mid/10 text-brand-mid text-sm font-semibold mb-8 animate-slide-up">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-mid opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-mid"></span>
+      </span>
+      #1 Instagram Downloader
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 animate-slide-up delay-100">
+      Download Instagram <br class="hidden sm:block" />
+      <span class="gradient-text">Content Instantly</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="max-w-2xl mx-auto text-lg sm:text-xl text-text-secondary mb-12 animate-slide-up delay-200">
+      Save high-quality videos, reels, and photos directly to your device. Fast, free, and no login required.
+    </p>
+
+    <!-- Download Input Component Placeholder -->
+    <div class="max-w-3xl mx-auto animate-slide-up delay-300">
+      <slot />
+    </div>
+
+    <!-- Stats / Trust Indicators -->
+    <div class="mt-16 flex flex-wrap justify-center gap-8 text-sm text-text-muted font-medium animate-slide-up delay-400">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        No Watermark
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        100% Secure
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        Lightning Fast
+      </div>
+    </div>
+  </div>
+</section>

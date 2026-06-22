@@ -1,0 +1,49 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Copy the Link',
+    desc: 'Open the Instagram app or website, find the post or reel you want to save, and copy its link.'
+  },
+  {
+    number: '02',
+    title: 'Paste the URL',
+    desc: 'Return to InstaDownloader and paste the copied link into the input box at the top of the page.'
+  },
+  {
+    number: '03',
+    title: 'Download & Save',
+    desc: 'Click the download button, choose your preferred quality, and save the content directly to your device.'
+  }
+];
+---
+
+<section id="how-it-works" class="py-24 relative">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+      <p class="text-text-secondary text-lg">Download any Instagram content in three simple steps. No app installation required.</p>
+    </div>
+
+    <div class="relative">
+      <!-- Connecting Line (Desktop) -->
+      <div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-transparent via-brand-mid/30 to-transparent"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+        {steps.map((step, index) => (
+          <div class="flex flex-col items-center text-center group">
+            <!-- Number Badge -->
+            <div class="w-24 h-24 rounded-full glass-card flex items-center justify-center mb-6 relative group-hover:-translate-y-2 transition-transform duration-300">
+              <div class="absolute inset-2 rounded-full border-2 border-dashed border-brand-mid/30 animate-[spin-slow_10s_linear_infinite]"></div>
+              <span class="text-3xl font-black gradient-text">{step.number}</span>
+            </div>
+            
+            <!-- Content -->
+            <h3 class="text-xl font-bold mb-3">{step.title}</h3>
+            <p class="text-text-secondary">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
