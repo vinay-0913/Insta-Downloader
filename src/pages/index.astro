@@ -8,14 +8,16 @@ import DownloadInput from '../components/DownloadInput.astro';
 import FormatCards from '../components/FormatCards.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
+import SeoContent from '../components/SeoContent.astro';
 import FAQ from '../components/FAQ.astro';
+import SitePages from '../components/SitePages.astro';
 import Footer from '../components/Footer.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
+<Layout
+  title="Instagram Downloader — Download Instagram Videos, Reels & Photos Free"
+  description="Free Instagram downloader to save Instagram videos, reels, photos & posts in HD & 4K quality. No watermark, no login, no app needed. The #1 online Instagram video downloader."
+>
   <Header />
   
   <main>
@@ -26,7 +28,9 @@ import Footer from '../components/Footer.astro';
     <FormatCards />
     <HowItWorks />
     <WhyChooseUs />
+    <SeoContent />
     <FAQ />
+    <SitePages />
   </main>
   
   <Footer />

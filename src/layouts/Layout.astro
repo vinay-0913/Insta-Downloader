@@ -4,11 +4,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
 const {
-  title = 'Insta Downloader — Download Instagram Videos, Reels & Photos',
-  description = 'Download Instagram videos, reels, and photos in HD quality. Free, fast, and no registration required. The best Instagram content downloader.'
+  title = 'Instagram Downloader — Download Instagram Videos, Reels & Photos Free',
+  description = 'Free Instagram downloader to save Instagram videos, reels, photos & posts in HD & 4K quality. No watermark, no login, no app needed. The #1 online Instagram video downloader.',
+  ogImage = 'https://instadownloader.com/og-image.png',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://instadownloader.com');
@@ -20,22 +22,34 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://instadownloader.com');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="keywords" content="instagram downloader, download instagram video, instagram reel downloader, download instagram photos, instagram content downloader" />
+    <meta name="keywords" content="instagram downloader, instagram reel downloader, instagram video downloader, instagram video downloader online, reel downloader, reel hd downloader free, instagram post downloader, insta post downloader, insta reel downloader, instagram reel downloader without watermark, instagram reel downloader 4k, instagram reel downloader free, reel downloader instagram, instagram downloader video, instagram downloader online, instagram downloader reels, online instagram downloader, reels instagram downloader, instagram post downloader online, online instagram video downloader, instagram video downloader hd, instagram video downloader 4k, instagram video downloader app, instagram video downloader free" />
     <meta name="author" content="InstaDownloader" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="language" content="English" />
     <link rel="canonical" href={canonicalURL.href} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-    <!-- Open Graph -->
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="InstaDownloader" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="InstaDownloader — Free Instagram Video & Reel Downloader" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@instadownloader" />
+    <meta name="twitter:creator" content="@instadownloader" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="InstaDownloader — Free Instagram Video & Reel Downloader" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,10 +60,19 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://instadownloader.com');
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#a855f7" />
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5XPSQM1Q2"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-H5XPSQM1Q2');
+    </script>
+
     <title>{title}</title>
 
     <!-- Schema.org WebApplication -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "InstaDownloader",
@@ -57,11 +80,33 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://instadownloader.com');
       "description": description,
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
-      }
+      },
+      "featureList": [
+        "Download Instagram Videos",
+        "Download Instagram Reels",
+        "Download Instagram Photos",
+        "HD & 4K Quality Downloads",
+        "No Watermark",
+        "No Login Required",
+        "Free to Use"
+      ]
+    })} />
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "InstaDownloader",
+      "url": "https://instadownloader.com",
+      "logo": "https://instadownloader.com/favicon.svg",
+      "description": "Free online Instagram downloader for videos, reels, photos and posts."
     })} />
 
     <!-- Dark mode initialization (prevent flash) -->
@@ -70,10 +115,8 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://instadownloader.com');
         const theme = localStorage.getItem('theme');
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
-        } else if (theme === 'light') {
+        } else {
           document.documentElement.classList.remove('dark');
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.classList.add('dark');
         }
       })();
     </script>

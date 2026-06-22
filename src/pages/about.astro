@@ -1,0 +1,158 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="About Us — InstaDownloader | Free Instagram Video Downloader"
+  description="Learn about InstaDownloader — the free, fast, and secure Instagram video, reel, and photo downloader. Our mission, story, and commitment to your privacy."
+>
+  <Header />
+
+  <main class="pt-24 pb-16 min-h-screen">
+    <!-- Hero -->
+    <section class="relative overflow-hidden py-16 sm:py-20">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 right-1/4 w-[500px] h-[300px] rounded-full blur-3xl opacity-15"
+          style="background: radial-gradient(ellipse, var(--color-brand-start), transparent 70%)"></div>
+        <div class="absolute bottom-0 left-1/4 w-[400px] h-[250px] rounded-full blur-3xl opacity-15"
+          style="background: radial-gradient(ellipse, var(--color-brand-end), transparent 70%)"></div>
+      </div>
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-text-secondary mb-6">
+          <svg class="w-4 h-4" style="color: var(--color-brand-mid)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          Our Story
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-6">
+          <span class="text-text-primary">About </span><span class="gradient-text">InstaDownloader</span>
+        </h1>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
+          We built InstaDownloader because downloading Instagram content shouldn't require an account, a paid subscription, or a privacy compromise. It should just work.
+        </p>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-xs font-semibold uppercase tracking-wider" style="color: var(--color-brand-mid)">
+            Our Mission
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-text-primary leading-tight">
+            Making Instagram content <span class="gradient-text">accessible to everyone</span>
+          </h2>
+          <p class="text-text-secondary leading-relaxed">
+            InstaDownloader was created with a single goal: to provide a fast, reliable, and completely free tool for saving Instagram content — whether it's a reel that made you laugh, a tutorial you want to reference offline, or a memory shared by a friend.
+          </p>
+          <p class="text-text-secondary leading-relaxed">
+            We believe that content you've seen online should be saveable for personal use. Our tool works without requiring you to create an account, install an app, or hand over your personal information. Simple, private, and effective.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { stat: "10M+", label: "Downloads Served", icon: "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" },
+            { stat: "HD & 4K", label: "Quality Output", icon: "M15 10l4.553-2.069A1 1 0 0121 8.868V15.13a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" },
+            { stat: "0", label: "Data Stored", icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" },
+            { stat: "Free", label: "Always & Forever", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+          ].map((item) => (
+            <div class="glass-card p-6 text-center hover:glass-card-hover cursor-default group">
+              <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
+                </svg>
+              </div>
+              <div class="text-2xl font-extrabold gradient-text mb-1">{item.stat}</div>
+              <div class="text-xs text-text-secondary font-medium">{item.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-text-primary mb-4">Our <span class="gradient-text">Core Values</span></h2>
+        <p class="text-text-secondary max-w-xl mx-auto">Everything we build is guided by these principles.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          {
+            title: "Privacy First",
+            desc: "We don't track you, store your URLs, or sell your data. Your activity stays between you and your browser.",
+            icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+            color: "#22c55e"
+          },
+          {
+            title: "Always Free",
+            desc: "InstaDownloader has always been free and will remain free. No subscriptions, no hidden fees, no premium tiers.",
+            icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+            color: "#f59e0b"
+          },
+          {
+            title: "Lightning Fast",
+            desc: "Our infrastructure is optimized for speed. Download your videos and reels in seconds, not minutes.",
+            icon: "M13 10V3L4 14h7v7l9-11h-7z",
+            color: "#a855f7"
+          },
+          {
+            title: "No Login Needed",
+            desc: "We'll never ask you to sign in with Instagram or create an account. Just paste a link and download.",
+            icon: "M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z",
+            color: "#e040a0"
+          },
+          {
+            title: "High Quality",
+            desc: "We deliver your content at the highest available resolution — HD, Full HD, and 4K where supported.",
+            icon: "M15 10l4.553-2.069A1 1 0 0121 8.868V15.13a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z",
+            color: "#ff6b6b"
+          },
+          {
+            title: "Transparent",
+            desc: "We're open about what we do and don't do with your data. No fine print surprises, no bait-and-switch.",
+            icon: "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
+            color: "#06b6d4"
+          },
+        ].map((value) => (
+          <div class="glass-card p-6 hover:glass-card-hover group transition-all duration-300">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+              style={`background: ${value.color}20; border: 1px solid ${value.color}40`}>
+              <svg class="w-6 h-6" style={`color: ${value.color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d={value.icon} />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-2">{value.title}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">{value.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="glass-card p-10 text-center relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute inset-0 opacity-5 gradient-bg"></div>
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-2xl sm:text-3xl font-bold text-text-primary mb-4">Ready to download?</h2>
+          <p class="text-text-secondary mb-8 max-w-lg mx-auto">Head back to the homepage and start downloading your favourite Instagram reels, videos, and photos for free.</p>
+          <a href="/" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl gradient-bg text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Start Downloading Free
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

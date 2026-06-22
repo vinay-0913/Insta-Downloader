@@ -1,0 +1,318 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { status, message } = Astro.props.error ?? { status: 500, message: 'Internal Server Error' };
+---
+
+<Layout
+  title="500 — Server Error | InstaDownloader"
+  description="Something went wrong on our end. Please try again later or contact InstaDownloader support."
+>
+  <Header />
+
+  <main class="error-page">
+
+    <!-- Background blobs -->
+    <div class="blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Radar rings (decorative) -->
+    <div class="radar" aria-hidden="true">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+    </div>
+
+    <div class="error-card">
+
+      <!-- Server icon with error badge -->
+      <div class="icon-wrap">
+        <div class="icon-inner animate-pulse-glow">
+          <svg class="icon-svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+          </svg>
+        </div>
+        <div class="error-dot" aria-hidden="true">
+          <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- 500 badge -->
+      <div class="badge-500" aria-hidden="true">500</div>
+
+      <h1 class="error-heading">Server <span class="gradient-text">Error</span></h1>
+      <p class="error-desc">
+        Something went wrong on our end. Our engineers have been notified and are working on a fix.
+      </p>
+
+      <!-- Error message pill -->
+      <div class="error-pill">
+        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <code>{message}</code>
+      </div>
+
+      <!-- System status -->
+      <div class="status-card glass-card">
+        <p class="status-heading">System Status</p>
+        <div class="status-list">
+          {[
+            { label: "API Gateway",       state: "degraded" },
+            { label: "Download Service",  state: "error"    },
+            { label: "CDN & Media",       state: "ok"       },
+            { label: "DNS Resolution",    state: "ok"       },
+          ].map(({ label, state }) => (
+            <div class="status-row">
+              <span class="status-label">{label}</span>
+              <span class={`status-badge s-${state}`}>
+                {state === 'ok' ? '● Operational' : state === 'degraded' ? '● Degraded' : '● Error'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button id="retry-btn" onclick="window.location.reload()" class="btn-primary">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          Try Again
+        </button>
+        <a href="/" id="home-500-btn" class="btn-secondary">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Go Home
+        </a>
+        <a href="/contact" id="report-500-btn" class="btn-secondary">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          Report Issue
+        </a>
+      </div>
+
+      <!-- Auto-retry countdown -->
+      <p class="countdown-text" id="countdown-text">
+        Auto-retrying in&nbsp;<span id="countdown" class="countdown-num">30</span>s
+      </p>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ── Page shell ─────────────────────────────────── */
+  .error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Blobs ──────────────────────────────────────── */
+  .blobs { position: absolute; inset: 0; pointer-events: none; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); animation: bf 9s ease-in-out infinite; }
+  .blob-1 { width: 400px; height: 400px; background: rgba(239,68,68,0.1);   top: -8%;  right: -5%;  }
+  .blob-2 { width: 340px; height: 340px; background: rgba(168,85,247,0.09); bottom: 5%; left: -5%; animation-delay: -4s; }
+  .blob-3 { width: 280px; height: 280px; background: rgba(224,64,160,0.07); top: 45%; left: 48%; animation-delay: -7s; }
+  @keyframes bf {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%      { transform: translate(-18px,15px) scale(1.04); }
+    66%      { transform: translate(14px,-18px) scale(0.96); }
+  }
+
+  /* ── Radar rings ────────────────────────────────── */
+  .radar { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(239,68,68,0.12);
+    transform: translate(-50%,-50%);
+    animation: radar 4s ease-out infinite;
+  }
+  .r1 { width: 260px; height: 260px; animation-delay: 0s; }
+  .r2 { width: 500px; height: 500px; animation-delay: 1.3s; }
+  .r3 { width: 740px; height: 740px; animation-delay: 2.6s; }
+  @keyframes radar {
+    0%   { opacity: 0; transform: translate(-50%,-50%) scale(0.55); }
+    50%  { opacity: 0.8; }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(1); }
+  }
+
+  /* ── Card ───────────────────────────────────────── */
+  .error-card {
+    position: relative; z-index: 10;
+    width: 100%; max-width: 520px;
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0;
+  }
+
+  /* ── Icon ───────────────────────────────────────── */
+  .icon-wrap { position: relative; margin-bottom: 1.25rem; }
+  .icon-inner {
+    width: 5rem; height: 5rem;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, var(--color-brand-start), var(--color-brand-mid), var(--color-brand-end));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 32px rgba(168,85,247,0.3);
+  }
+  .icon-svg { width: 2.5rem; height: 2.5rem; color: #fff; }
+  .error-dot {
+    position: absolute; top: -6px; right: -6px;
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 50%;
+    background: #ef4444;
+    border: 2px solid var(--color-surface);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(239,68,68,0.4);
+    animation: dot-blink 1.8s ease-in-out infinite;
+  }
+  @keyframes dot-blink { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  /* ── 500 badge ──────────────────────────────────── */
+  .badge-500 {
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ef4444, var(--color-brand-mid), var(--color-brand-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shake 5s ease-in-out infinite;
+  }
+  @keyframes shake {
+    0%,82%,100% { transform: none; }
+    84% { transform: translateX(-4px) rotate(-0.4deg); }
+    86% { transform: translateX(4px)  rotate(0.4deg);  }
+    88% { transform: translateX(-2px); }
+    90% { transform: translateX(2px);  }
+    92% { transform: none; }
+  }
+
+  /* ── Text ───────────────────────────────────────── */
+  .error-heading {
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: 0.65rem;
+  }
+  .error-desc {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    max-width: 38ch;
+    margin: 0 auto 1rem;
+  }
+
+  /* ── Error pill ─────────────────────────────────── */
+  .error-pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.2);
+    color: #ef4444;
+    font-size: 0.78rem;
+    margin-bottom: 1.5rem;
+  }
+  .error-pill code { font-family: ui-monospace, monospace; }
+
+  /* ── Status card ────────────────────────────────── */
+  .status-card {
+    width: 100%; max-width: 360px;
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    margin-bottom: 1.75rem;
+    text-align: left;
+  }
+  .status-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+  .status-list { display: flex; flex-direction: column; gap: 0.55rem; }
+  .status-row { display: flex; align-items: center; justify-content: space-between; }
+  .status-label { font-size: 0.85rem; color: var(--color-text-secondary); }
+  .status-badge {
+    font-size: 0.72rem; font-weight: 600;
+    padding: 0.12rem 0.55rem; border-radius: 999px;
+  }
+  .s-ok       { color: #22c55e; background: rgba(34,197,94,0.1); }
+  .s-degraded { color: #f59e0b; background: rgba(245,158,11,0.1); }
+  .s-error    { color: #ef4444; background: rgba(239,68,68,0.1); animation: dot-blink 1.5s ease-in-out infinite; }
+
+  /* ── Actions ────────────────────────────────────── */
+  .actions {
+    display: flex; flex-wrap: wrap; gap: 0.65rem; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, var(--color-brand-start), var(--color-brand-mid), var(--color-brand-end));
+    color: #fff; font-weight: 600; font-size: 0.875rem;
+    box-shadow: 0 4px 18px rgba(168,85,247,0.28);
+    border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; text-decoration: none;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 7px 24px rgba(168,85,247,0.38); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 0.75rem;
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary); font-weight: 600; font-size: 0.875rem;
+    backdrop-filter: blur(12px);
+    transition: transform 0.2s, background 0.2s; text-decoration: none;
+  }
+  .btn-secondary:hover { transform: translateY(-2px); background: var(--color-surface-card-hover); }
+
+  /* ── Countdown ──────────────────────────────────── */
+  .countdown-text { font-size: 0.8rem; color: var(--color-text-muted); }
+  .countdown-num  { font-weight: 700; color: var(--color-brand-mid); }
+</style>
+
+<script>
+  let seconds = 30;
+  const countdownEl   = document.getElementById('countdown');
+  const countdownText = document.getElementById('countdown-text');
+
+  const timer = setInterval(() => {
+    seconds--;
+    if (countdownEl) countdownEl.textContent = String(seconds);
+    if (seconds <= 0) {
+      clearInterval(timer);
+      if (countdownText) countdownText.textContent = 'Retrying…';
+      window.location.reload();
+    }
+  }, 1000);
+
+  document.getElementById('retry-btn')?.addEventListener('click',    () => clearInterval(timer));
+  document.getElementById('home-500-btn')?.addEventListener('click', () => clearInterval(timer));
+</script>

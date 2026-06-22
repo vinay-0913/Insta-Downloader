@@ -1,0 +1,336 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Contact Us — InstaDownloader | Get in Touch"
+  description="Have a question, suggestion, or issue with InstaDownloader? Contact us and our team will get back to you as soon as possible."
+>
+  <Header />
+
+  <main class="pt-24 pb-16 min-h-screen">
+    <!-- Hero -->
+    <section class="relative overflow-hidden py-16 sm:py-20">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 right-1/3 w-[500px] h-[280px] rounded-full blur-3xl opacity-20"
+          style="background: radial-gradient(ellipse, var(--color-brand-start), transparent 70%)"></div>
+        <div class="absolute bottom-0 left-1/3 w-[400px] h-[250px] rounded-full blur-3xl opacity-15"
+          style="background: radial-gradient(ellipse, var(--color-brand-end), transparent 70%)"></div>
+      </div>
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-text-secondary mb-6">
+          <svg class="w-4 h-4" style="color: var(--color-brand-mid)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          We'd love to hear from you
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+          <span class="gradient-text">Contact</span> <span class="text-text-primary">Us</span>
+        </h1>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+          Have a question, found a bug, or want to suggest a feature? We're here to help. Fill in the form below and we'll respond within 48 hours.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Layout -->
+    <section class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+        <!-- Contact Info Sidebar -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="glass-card p-8 space-y-8">
+            <div>
+              <h2 class="text-xl font-bold text-text-primary mb-2">Get in touch</h2>
+              <p class="text-sm text-text-secondary leading-relaxed">We typically respond to all inquiries within 24–48 hours on business days.</p>
+            </div>
+
+            <div class="space-y-6">
+              {[
+                {
+                  icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                  label: "Email",
+                  value: "support@instadownloader.com",
+                  href: "mailto:support@instadownloader.com"
+                },
+                {
+                  icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+                  label: "Response Time",
+                  value: "Within 24–48 hours",
+                  href: null
+                },
+                {
+                  icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+                  label: "Languages",
+                  value: "English",
+                  href: null
+                },
+              ].map((item) => (
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-xs text-text-muted font-semibold uppercase tracking-wider mb-0.5">{item.label}</p>
+                    {item.href
+                      ? <a href={item.href} class="text-sm font-medium text-text-primary hover:text-brand-mid transition-colors">{item.value}</a>
+                      : <p class="text-sm font-medium text-text-primary">{item.value}</p>
+                    }
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Quick FAQ shortcuts -->
+            <div class="border-t border-border pt-6">
+              <p class="text-xs font-semibold text-text-muted uppercase tracking-wider mb-3">Common Topics</p>
+              <div class="space-y-2">
+                {["Download not working", "Report a bug", "DMCA / Content removal", "Feature request", "Business inquiry"].map((topic) => (
+                  <button
+                    type="button"
+                    onclick={`document.getElementById('subject').value = '${topic}'; document.getElementById('subject').focus();`}
+                    class="w-full text-left text-sm px-3 py-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-card transition-all duration-200 border border-transparent hover:border-border"
+                  >
+                    {topic} →
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="lg:col-span-3">
+          <div class="glass-card p-8 sm:p-10">
+            <h2 class="text-xl font-bold text-text-primary mb-8">Send us a message</h2>
+
+            <form id="contact-form" class="space-y-6" novalidate>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="form-group">
+                  <label for="name" class="form-label">Your Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="John Doe"
+                    required
+                    class="form-input"
+                    autocomplete="name"
+                  />
+                  <p class="form-error hidden" id="name-error">Please enter your name.</p>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="john@example.com"
+                    required
+                    class="form-input"
+                    autocomplete="email"
+                  />
+                  <p class="form-error hidden" id="email-error">Please enter a valid email.</p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="What can we help you with?"
+                  required
+                  class="form-input"
+                />
+                <p class="form-error hidden" id="subject-error">Please enter a subject.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Describe your issue or question in detail..."
+                  required
+                  class="form-input resize-none"
+                ></textarea>
+                <p class="form-error hidden" id="message-error">Please enter a message (min. 20 characters).</p>
+              </div>
+
+              <!-- Honeypot (anti-spam) -->
+              <input type="text" name="_honey" class="hidden" aria-hidden="true" tabindex="-1" />
+
+              <div class="flex items-start gap-3">
+                <input type="checkbox" id="agree" name="agree" required class="mt-1 w-4 h-4 accent-brand-mid cursor-pointer" />
+                <label for="agree" class="text-sm text-text-secondary cursor-pointer">
+                  I agree to the <a href="/privacy-policy" class="text-brand-mid hover:underline">Privacy Policy</a> and confirm I'm not submitting spam.
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full flex items-center justify-center gap-2 px-8 py-4 rounded-xl gradient-bg text-white font-semibold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+              >
+                <svg id="btn-icon-send" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+                <svg id="btn-icon-spinner" class="w-5 h-5 hidden animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                <span id="btn-text">Send Message</span>
+              </button>
+
+              <!-- Success / Error messages -->
+              <div id="form-success" class="hidden flex items-center gap-3 p-4 rounded-xl" style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25);">
+                <svg class="w-5 h-5 flex-shrink-0" style="color: #22c55e" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm" style="color: #22c55e">Thank you! Your message has been sent. We'll get back to you within 48 hours.</p>
+              </div>
+              <div id="form-error-msg" class="hidden flex items-center gap-3 p-4 rounded-xl" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25);">
+                <svg class="w-5 h-5 flex-shrink-0" style="color: #ef4444" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm" style="color: #ef4444">Something went wrong. Please email us directly at support@instadownloader.com</p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .form-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-surface-card);
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+    backdrop-filter: blur(8px);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-input:focus {
+    border-color: var(--color-brand-mid);
+    box-shadow: 0 0 0 3px rgba(224, 64, 160, 0.15);
+    background: var(--color-surface-card-hover);
+  }
+
+  .form-error {
+    font-size: 0.8rem;
+    color: var(--color-error);
+    margin-top: 0.35rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-input.error {
+    border-color: var(--color-error);
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text')!;
+  const btnIconSend = document.getElementById('btn-icon-send')!;
+  const btnIconSpinner = document.getElementById('btn-icon-spinner')!;
+  const successMsg = document.getElementById('form-success')!;
+  const errorMsg = document.getElementById('form-error-msg')!;
+
+  function showError(fieldId: string, errorId: string) {
+    const field = document.getElementById(fieldId)!;
+    const error = document.getElementById(errorId)!;
+    field.classList.add('error');
+    error.classList.remove('hidden');
+  }
+
+  function clearError(fieldId: string, errorId: string) {
+    const field = document.getElementById(fieldId)!;
+    const error = document.getElementById(errorId)!;
+    field.classList.remove('error');
+    error.classList.add('hidden');
+  }
+
+  // Inline validation
+  ['name', 'email', 'subject', 'message'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', () => {
+      clearError(id, `${id}-error`);
+    });
+  });
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const subject = (document.getElementById('subject') as HTMLInputElement).value.trim();
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+    const honey = (form.querySelector('[name="_honey"]') as HTMLInputElement).value;
+    const agree = (document.getElementById('agree') as HTMLInputElement).checked;
+
+    // Bot check
+    if (honey) return;
+
+    if (!name) { showError('name', 'name-error'); valid = false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', 'email-error'); valid = false; }
+    if (!subject) { showError('subject', 'subject-error'); valid = false; }
+    if (!message || message.length < 20) { showError('message', 'message-error'); valid = false; }
+    if (!agree) { valid = false; }
+
+    if (!valid) return;
+
+    // Simulate submission (replace with real endpoint)
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending...';
+    btnIconSend.classList.add('hidden');
+    btnIconSpinner.classList.remove('hidden');
+
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Show success (in real implementation, POST to your endpoint)
+    successMsg.classList.remove('hidden');
+    successMsg.style.display = 'flex';
+    form.reset();
+    submitBtn.disabled = false;
+    btnText.textContent = 'Send Message';
+    btnIconSend.classList.remove('hidden');
+    btnIconSpinner.classList.add('hidden');
+  });
+</script>

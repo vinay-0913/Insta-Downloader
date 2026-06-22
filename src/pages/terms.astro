@@ -1,0 +1,219 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = "June 21, 2025";
+---
+
+<Layout
+  title="Terms & Conditions — InstaDownloader"
+  description="Read InstaDownloader's Terms and Conditions. By using our free Instagram downloader, you agree to these terms of service."
+>
+  <Header />
+
+  <main class="pt-24 pb-16 min-h-screen">
+    <!-- Hero Banner -->
+    <section class="relative overflow-hidden py-16 sm:py-20">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-1/3 w-[500px] h-[280px] rounded-full blur-3xl opacity-20"
+          style="background: radial-gradient(ellipse, var(--color-brand-end), transparent 70%)"></div>
+      </div>
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-text-secondary mb-6">
+          <svg class="w-4 h-4" style="color: var(--color-brand-mid)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Last updated: {lastUpdated}
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">
+          <span class="gradient-text">Terms &amp;</span> <span class="text-text-primary">Conditions</span>
+        </h1>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+          Please read these terms carefully before using InstaDownloader. By accessing our service, you agree to be bound by these terms.
+        </p>
+      </div>
+    </section>
+
+    <!-- Warning banner -->
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 mb-8">
+      <div class="flex items-start gap-3 p-4 rounded-xl border" style="background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.25); color: var(--color-text-secondary)">
+        <svg class="w-5 h-5 flex-shrink-0 mt-0.5" style="color: #f59e0b" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <p class="text-sm leading-relaxed">
+          <strong style="color: var(--color-text-primary)">Important:</strong> InstaDownloader is intended for personal, non-commercial use only. Downloading and redistributing copyrighted content without the creator's permission may violate copyright law in your jurisdiction.
+        </p>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <section class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="glass-card p-8 sm:p-12 space-y-10 policy-content">
+
+        <div class="policy-section">
+          <h2>1. Acceptance of Terms</h2>
+          <p>By accessing or using InstaDownloader (the "Service"), you confirm that you have read, understood, and agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use the Service.</p>
+          <p>We reserve the right to modify these Terms at any time. Continued use of the Service after changes constitutes your acceptance of the revised Terms.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>2. Description of Service</h2>
+          <p>InstaDownloader provides a free online tool that allows users to download publicly available Instagram content including:</p>
+          <ul>
+            <li>Instagram videos and reels</li>
+            <li>Instagram photos and carousel posts</li>
+            <li>Instagram stories (public accounts only)</li>
+          </ul>
+          <p>Our service only processes publicly available content. We do not and cannot circumvent Instagram's privacy settings to access private content.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>3. Permitted Use</h2>
+          <p>You may use InstaDownloader only for lawful purposes and in accordance with these Terms. Specifically, you may use the Service to:</p>
+          <ul>
+            <li>Save content for personal, non-commercial offline viewing</li>
+            <li>Archive your own published Instagram content</li>
+            <li>Download content you have explicit permission from the creator to download</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>4. Prohibited Use</h2>
+          <p>You must not use InstaDownloader to:</p>
+          <ul>
+            <li>Download and redistribute content that infringes on the copyright or intellectual property rights of others</li>
+            <li>Download content for commercial use without the creator's explicit consent</li>
+            <li>Engage in any form of automated scraping or mass downloading</li>
+            <li>Attempt to circumvent technical limitations of the Service</li>
+            <li>Use the Service in a manner that could damage, disable, or impair the Service</li>
+            <li>Harass, stalk, or harm any individual using downloaded content</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>5. Intellectual Property</h2>
+          <p>All Instagram content belongs to its respective creators and is subject to Instagram's Terms of Service and applicable copyright laws. By using our Service, you acknowledge that:</p>
+          <ul>
+            <li>InstaDownloader does not claim ownership of any downloaded content</li>
+            <li>You are solely responsible for ensuring your use of downloaded content complies with applicable laws</li>
+            <li>Downloaded content must not be used in ways that infringe on creators' rights</li>
+          </ul>
+          <p>The InstaDownloader website, its design, logo, and proprietary technology remain the intellectual property of InstaDownloader.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>6. Disclaimer of Warranties</h2>
+          <p>The Service is provided "as is" and "as available" without warranties of any kind, either express or implied. InstaDownloader does not warrant that:</p>
+          <ul>
+            <li>The Service will be uninterrupted or error-free</li>
+            <li>Downloads will always succeed (content availability depends on Instagram's platform)</li>
+            <li>The Service will be available at all times</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>7. Limitation of Liability</h2>
+          <p>To the maximum extent permitted by law, InstaDownloader and its operators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the Service.</p>
+          <p>InstaDownloader is not responsible for how you use the content you download. You assume full responsibility and liability for your use of any downloaded content.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>8. Third-Party Services & Affiliation</h2>
+          <p>InstaDownloader is an independent tool and is not affiliated with, endorsed by, or connected to Instagram, Meta Platforms, Inc., or any of their subsidiaries. Use of Instagram's platform remains subject to Instagram's own Terms of Service.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>9. Termination</h2>
+          <p>We reserve the right to terminate or restrict your access to the Service at any time, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, third parties, or the interests of the Service.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>10. Governing Law</h2>
+          <p>These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of competent courts.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>11. Contact</h2>
+          <p>If you have any questions about these Terms and Conditions, please <a href="/contact">contact us</a>. We're happy to clarify anything.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .policy-content h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    background: linear-gradient(135deg, var(--color-brand-start), var(--color-brand-mid));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .policy-section {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .policy-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .policy-content p {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+  }
+
+  .policy-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .policy-content ul li {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .policy-content ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-brand-mid);
+    font-weight: 700;
+  }
+
+  .policy-content a {
+    color: var(--color-brand-mid);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+  }
+
+  .policy-content a:hover {
+    opacity: 0.8;
+  }
+
+  .policy-content strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+</style>

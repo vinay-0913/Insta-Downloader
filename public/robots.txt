@@ -1,0 +1,15 @@
+# robots.txt — InstaDownloader
+# https://instadownloder.com
+
+User-agent: *
+Allow: /
+
+# Block API endpoints — no value for crawlers
+Disallow: /api/
+
+# Block error pages
+Disallow: /404
+Disallow: /500
+
+# Sitemap
+Sitemap: https://instadownloder.com/sitemap.xml

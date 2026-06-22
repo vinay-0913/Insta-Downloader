@@ -6,12 +6,12 @@
     <nav class="flex items-center justify-between h-16 sm:h-20" aria-label="Main navigation">
       <!-- Logo -->
       <a href="/" id="logo-link" class="flex items-center gap-2.5 group" aria-label="InstaDownloader Home">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl gradient-bg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
         </div>
-        <span class="text-lg sm:text-xl font-bold">
+        <span class="text-base sm:text-xl font-bold">
           <span class="gradient-text">Insta</span><span class="text-text-primary">Downloader</span>
         </span>
       </a>
@@ -21,6 +21,8 @@
         <a href="#features" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200">Features</a>
         <a href="#how-it-works" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200">How It Works</a>
         <a href="#faq" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200">FAQ</a>
+        <a href="/about" class="text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200">About</a>
+        <a href="/contact" class="text-sm font-medium px-4 py-2 rounded-lg gradient-bg text-white hover:opacity-90 transition-all duration-200">Contact</a>
         
         <!-- Theme Toggle -->
         <button id="theme-toggle" class="relative w-10 h-10 rounded-xl glass-card flex items-center justify-center hover:glass-card-hover cursor-pointer" aria-label="Toggle dark mode">
@@ -54,11 +56,15 @@
     </nav>
 
     <!-- Mobile Menu Dropdown -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4">
+    <div id="mobile-menu" class="hidden md:hidden pb-4 max-h-[calc(100vh-5rem)] overflow-y-auto">
       <div class="glass-card p-4 rounded-2xl space-y-1">
         <a href="#features" class="block px-4 py-2.5 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-white/10 rounded-xl transition-all duration-200">Features</a>
         <a href="#how-it-works" class="block px-4 py-2.5 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-white/10 rounded-xl transition-all duration-200">How It Works</a>
         <a href="#faq" class="block px-4 py-2.5 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-white/10 rounded-xl transition-all duration-200">FAQ</a>
+        <a href="/about" class="block px-4 py-2.5 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-white/10 rounded-xl transition-all duration-200">About Us</a>
+        <div class="pt-1">
+          <a href="/contact" class="block px-4 py-2.5 text-sm font-semibold text-white gradient-bg rounded-xl text-center transition-all duration-200 hover:opacity-90">Contact Us</a>
+        </div>
       </div>
     </div>
   </div>

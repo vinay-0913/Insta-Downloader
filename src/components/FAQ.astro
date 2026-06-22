@@ -1,65 +1,161 @@
 ---
 const faqs = [
   {
+    q: "What is InstaDownloader and how does it work?",
+    a: "InstaDownloader is a free online Instagram downloader that lets you save Instagram videos, reels, photos, and posts directly to your device. Simply paste the Instagram URL into the input box and click Download. Our tool fetches the media from Instagram's servers and delivers it in the highest available quality — no watermark, no login, no app required."
+  },
+  {
+    q: "Can I use this as an Instagram reel downloader without watermark?",
+    a: "Yes! InstaDownloader is a dedicated Instagram reel downloader without watermark. Every reel you download is saved in its original quality — exactly as it appears on Instagram — with no added branding or watermarks. You get a clean, original file ready to save or share."
+  },
+  {
+    q: "Does this work as an Instagram video downloader online?",
+    a: "Absolutely. InstaDownloader is a fully web-based Instagram video downloader online — there is nothing to install. It works in any modern browser on any device: iPhone, Android, Windows, Mac, or tablet. Just paste the Instagram video URL and download it instantly."
+  },
+  {
+    q: "Can I download Instagram reels in HD or 4K quality?",
+    a: "Yes! Our Instagram reel downloader HD supports up to 4K quality where available. We fetch the highest resolution Instagram offers for the post. This makes InstaDownloader one of the best Instagram reel downloader 4K tools available online, completely free."
+  },
+  {
+    q: "Is this an Instagram post downloader for photos too?",
+    a: "Yes, InstaDownloader works as a full Instagram post downloader — not just for videos. You can download single photos, carousel posts with multiple images, and reels all with the same tool. It is your all-in-one insta post downloader for any public content."
+  },
+  {
     q: "Is it legal to download Instagram videos and photos?",
-    a: "Yes, it is perfectly legal to download Instagram content for personal use. However, you should not use downloaded content for commercial purposes or claim it as your own without permission from the original creator."
+    a: "Downloading Instagram content for personal, offline viewing is generally considered fair use. However, you should not republish, sell, or claim downloaded content as your own without permission from the original creator. Always respect copyright and Instagram's terms of service."
   },
   {
-    q: "Do I need to install any software to use InstaDownloader?",
-    a: "No! InstaDownloader is a web-based tool. You don't need to install any software, apps, or browser extensions. It works perfectly in any web browser on your phone, tablet, or computer."
+    q: "Do I need to install any app or software?",
+    a: "No installation is needed. InstaDownloader is a 100% online Instagram downloader — no app, no browser extension, no software. It runs entirely in your web browser, making it the easiest and safest way to download Instagram content on any device."
   },
   {
-    q: "Are there any download limits?",
-    a: "No, there are absolutely no limits. You can download as many videos, reels, and photos as you want, completely free of charge."
+    q: "Are there any download limits on this free reel downloader?",
+    a: "No. InstaDownloader is a completely free reel downloader with no daily limits, no caps, and no subscription fees. You can download as many Instagram videos, reels, and photos as you want, as often as you want — completely free of charge."
   },
   {
-    q: "Can I download content from private Instagram accounts?",
-    a: "No. InstaDownloader can only download content from public Instagram accounts. We respect user privacy and Instagram's security policies, so private content remains inaccessible."
+    q: "Can I download from private Instagram accounts?",
+    a: "No. InstaDownloader only works with public Instagram content. Private accounts require Instagram authentication, which we do not request or support. We respect user privacy and Instagram's security policies."
   },
   {
-    q: "Where are the downloaded files saved on my device?",
-    a: "When you download a file, it is saved to your browser's default download location. On mobile devices, this is usually the 'Downloads' folder or your camera roll/gallery. On PC/Mac, it's typically the 'Downloads' folder."
-  },
-  {
-    q: "Will the downloaded videos have a watermark?",
-    a: "No, all videos and photos downloaded through our tool are completely watermark-free and in their original quality."
+    q: "Where are the downloaded files saved?",
+    a: "Files are saved to your browser's default download folder. On mobile (iPhone/Android), they typically go to your Downloads folder, Photos app, or camera roll. On desktop (Windows/Mac), they go to your Downloads folder. You can change your browser's default download location in its settings."
   }
 ];
+---
 
-// Generate Schema.org JSON-LD for FAQ
-const faqSchema = {
+<!--
+  FAQ Section
+  JSON-LD structured data is written as a static literal script block
+  (not serialized via JS) so Google can parse it without executing any code.
+  This follows the exact format recommended in Google's Rich Results documentation.
+-->
+
+<!-- ✅ FAQ JSON-LD Structured Data (Google Rich Results eligible) -->
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.a
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is InstaDownloader and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "InstaDownloader is a free online Instagram downloader that lets you save Instagram videos, reels, photos, and posts directly to your device. Simply paste the Instagram URL into the input box and click Download. Our tool fetches the media from Instagram's servers and delivers it in the highest available quality — no watermark, no login, no app required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this as an Instagram reel downloader without watermark?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! InstaDownloader is a dedicated Instagram reel downloader without watermark. Every reel you download is saved in its original quality — exactly as it appears on Instagram — with no added branding or watermarks. You get a clean, original file ready to save or share."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work as an Instagram video downloader online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. InstaDownloader is a fully web-based Instagram video downloader online — there is nothing to install. It works in any modern browser on any device: iPhone, Android, Windows, Mac, or tablet. Just paste the Instagram video URL and download it instantly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I download Instagram reels in HD or 4K quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Our Instagram reel downloader HD supports up to 4K quality where available. We fetch the highest resolution Instagram offers for the post. This makes InstaDownloader one of the best Instagram reel downloader 4K tools available online, completely free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this an Instagram post downloader for photos too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, InstaDownloader works as a full Instagram post downloader — not just for videos. You can download single photos, carousel posts with multiple images, and reels all with the same tool. It is your all-in-one insta post downloader for any public content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it legal to download Instagram videos and photos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Downloading Instagram content for personal, offline viewing is generally considered fair use. However, you should not republish, sell, or claim downloaded content as your own without permission from the original creator. Always respect copyright and Instagram's terms of service."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to install any app or software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No installation is needed. InstaDownloader is a 100% online Instagram downloader — no app, no browser extension, no software. It runs entirely in your web browser, making it the easiest and safest way to download Instagram content on any device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are there any download limits on this free reel downloader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. InstaDownloader is a completely free reel downloader with no daily limits, no caps, and no subscription fees. You can download as many Instagram videos, reels, and photos as you want, as often as you want — completely free of charge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I download from private Instagram accounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. InstaDownloader only works with public Instagram content. Private accounts require Instagram authentication, which we do not request or support. We respect user privacy and Instagram's security policies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are the downloaded files saved?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Files are saved to your browser's default download folder. On mobile (iPhone/Android), they typically go to your Downloads folder, Photos app, or camera roll. On desktop (Windows/Mac), they go to your Downloads folder. You can change your browser's default download location in its settings."
+      }
     }
-  }))
-};
----
+  ]
+}
+</script>
 
 <section id="faq" class="py-24 relative">
   <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-      <p class="text-text-secondary text-lg">Got questions? We've got answers.</p>
+      <p class="text-text-secondary text-lg">Everything you need to know about our free Instagram downloader.</p>
     </div>
-
-    <!-- Inject Schema.org JSON -->
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
     <div class="space-y-4">
       {faqs.map((faq, i) => (
         <div class="faq-item glass-card overflow-hidden transition-all duration-300">
           <button 
-            class="faq-button w-full px-6 py-5 text-left flex justify-between items-center gap-4 focus:outline-none focus-visible:bg-surface-alt"
+            class="faq-button w-full px-4 py-4 sm:px-6 sm:py-5 text-left flex justify-between items-center gap-4 focus:outline-none focus-visible:bg-surface-alt"
             aria-expanded="false"
             aria-controls={`faq-answer-${i}`}
           >
-            <span class="font-semibold text-lg text-text-primary">{faq.q}</span>
+            <span class="font-semibold text-base sm:text-lg text-text-primary">{faq.q}</span>
             <span class="faq-icon text-brand-mid transition-transform duration-300 shrink-0">
               <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -72,7 +168,7 @@ const faqSchema = {
             class="faq-answer grid grid-rows-[0fr] transition-all duration-300"
           >
             <div class="overflow-hidden">
-              <p class="px-6 pb-6 text-text-secondary leading-relaxed">
+              <p class="px-4 sm:px-6 pb-5 sm:pb-6 text-text-secondary leading-relaxed">
                 {faq.a}
               </p>
             </div>
@@ -90,7 +186,7 @@ const faqSchema = {
     faqItems.forEach(item => {
       const button = item.querySelector('.faq-button');
       const answer = item.querySelector('.faq-answer');
-      const icon = item.querySelector('.faq-icon');
+      const icon = item.querySelector('.faq-icon') as HTMLElement | null;
       
       if (!button || !answer || !icon) return;
       
@@ -102,7 +198,7 @@ const faqSchema = {
           if (otherItem !== item) {
             const otherButton = otherItem.querySelector('.faq-button');
             const otherAnswer = otherItem.querySelector('.faq-answer');
-            const otherIcon = otherItem.querySelector('.faq-icon');
+            const otherIcon = otherItem.querySelector('.faq-icon') as HTMLElement | null;
             
             if (otherButton && otherAnswer && otherIcon) {
               otherButton.setAttribute('aria-expanded', 'false');

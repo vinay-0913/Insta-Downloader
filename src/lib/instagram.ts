@@ -139,10 +139,7 @@ async function fetchInstagramPage(url: string): Promise<string> {
 }
 
 function getProxyUrl(): string | null {
-  if (typeof process !== 'undefined' && process.env) {
-    return process.env.PROXY_URL || null;
-  }
-  return null;
+  return import.meta.env.PROXY_URL ?? null;
 }
 
 // ─── HTML Parsing Helpers ───
@@ -446,8 +443,8 @@ export async function scrapeInstagram(inputUrl: string): Promise<DownloadResult>
       
       // Keep up to 3 qualities
       videos = videos.slice(0, 3);
-      const qualityLabels = videos.length === 3 ? ['High', 'Medium', 'Low'] : 
-                            videos.length === 2 ? ['High', 'Low'] : ['High'];
+      const qualityLabels = videos.length === 3 ? ['Full HD', 'HD', 'Medium'] : 
+                            videos.length === 2 ? ['Full HD', 'HD'] : ['Full HD'];
                             
       videos.forEach((vid, idx) => {
         vid.quality = qualityLabels[idx];
@@ -475,8 +472,8 @@ export async function scrapeInstagram(inputUrl: string): Promise<DownloadResult>
         
         images.sort((a, b) => (b.width || 0) - (a.width || 0));
         images = images.slice(0, 3);
-        const qualityLabels = images.length === 3 ? ['High', 'Medium', 'Low'] : 
-                              images.length === 2 ? ['High', 'Low'] : ['High'];
+        const qualityLabels = images.length === 3 ? ['Full HD', 'HD', 'Medium'] : 
+                              images.length === 2 ? ['Full HD', 'HD'] : ['Full HD'];
                               
         images.forEach((img, idx) => {
           img.quality = qualityLabels[idx];
