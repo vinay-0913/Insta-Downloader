@@ -29,3 +29,5 @@ pnpm-debug.log*
 
 # Test files
 test_dupe.mjs
+
+.vercel
