@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-const SITE_URL = 'https://instadownloder.com';
+const SITE_URL = 'https://www.instadownloder.com';
 
 interface SitemapURL {
   loc: string;
